@@ -1,0 +1,6 @@
+{
+  "crypto_name": "BTC",
+  "fiat_name": "USD",
+  "topup_threshold": 720,
+  "topup_amount": 720
+} 
