@@ -33,13 +33,14 @@ def cbpPlaceOrder(client, cryptoName, fiatName, amount):
 def cbpGetFiatBalance(client, fiatCurrency):
     logging.info(f"Getting {fiatCurrency} balance.")
     result = client.get_accounts()
-    for account in result:
-        if account["currency"] == fiatCurrency:
-            balance = round(float(account["balance"]), 2)
-            logging.info(f"{fiatCurrency} balance is: {str(balance)}.")
-            return account
-    else:
+    if isinstance(result, list):
+        for account in result:
+            if account["currency"] == fiatCurrency:
+                balance = round(float(account["balance"]), 2)
+                logging.info(f"{fiatCurrency} balance is: {str(balance)}.")
+                return account
         return {"Error": f"Unable to find account for currency {fiatCurrency}."}
+    return {"Error": f"Error getting accounts:\n{result}"}
 
 
 def cbpGetBankId(client, bankIdentifier):
