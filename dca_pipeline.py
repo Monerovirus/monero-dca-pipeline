@@ -5,14 +5,14 @@ import math, os, sys, logging, cbpro, csv
 import json_io
 from coinbase_pro_tasks import cbpPlaceOrder, cbpGetFiatBalance, cbpTryDepositFromBank, cbpTryWithdrawCrypto
 
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 handler = logging.FileHandler(SCRIPT_PATH + 'log.txt', 'w', 'utf-8')
 handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
 logger.addHandler(handler)
 logger.addHandler(logging.StreamHandler(sys.stdout))
-
-SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def succeeded(data):
     if "Error" in data and data["Error"] != None:
