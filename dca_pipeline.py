@@ -20,9 +20,10 @@ def succeeded(data):
         return False
     return True
 
-def writeToCsv(SCRIPT_PATH + fileName, data):
-    isNew = not os.path.exists(fileName)
-    with open(fileName, 'a+', newline='') as csvfile:
+def writeToCsv(fileName, data):
+    fullPath = SCRIPT_PATH + fileName
+    isNew = not os.path.exists(fullpath)
+    with open(fullPath, 'a+', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=data.keys())
         if isNew:
             writer.writeheader()
