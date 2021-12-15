@@ -7,10 +7,12 @@ from coinbase_pro_tasks import cbpPlaceOrder, cbpGetFiatBalance, cbpTryDepositFr
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler('log.txt', 'w', 'utf-8')
+handler = logging.FileHandler(SCRIPT_PATH + 'log.txt', 'w', 'utf-8')
 handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
 logger.addHandler(handler)
 logger.addHandler(logging.StreamHandler(sys.stdout))
+
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def succeeded(data):
     if "Error" in data and data["Error"] != None:
@@ -18,7 +20,7 @@ def succeeded(data):
         return False
     return True
 
-def writeToCsv(fileName, data):
+def writeToCsv(SCRIPT_PATH + fileName, data):
     isNew = not os.path.exists(fileName)
     with open(fileName, 'a+', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=data.keys())
