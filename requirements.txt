@@ -1,2 +1,1 @@
-pathlib
 git+git://github.com/Monerovirus/coinbasepro-python.git
