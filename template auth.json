@@ -3,5 +3,9 @@
     "key": "",
     "secret": "",
     "password": ""
+  },
+  "changenow": {
+    "key": "",
+    "password": ""
   }
 }
