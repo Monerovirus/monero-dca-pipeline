@@ -1,6 +1,3 @@
-# dependent on Path (pip3 install pathlib)
-# and cbpro (pip3 install git+git://github.com/Monerovirus/coinbasepro-python.git)
-
 import math, os, sys, logging, cbpro, csv
 import json_io
 from coinbase_pro_tasks import cbpPlaceOrder, cbpGetFiatBalance, cbpTryDepositFromBank, cbpTryWithdrawCrypto
