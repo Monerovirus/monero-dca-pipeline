@@ -23,8 +23,27 @@ def post(url, body=None):
 
 def cnVerifyExchange(apiKey, idString):
     url = api_url + idString + "/" + apiKey
+    tryCount = 0
+    retryCount = 60
+    waitSeconds = 120
+    result = None
 
-    return get(url)
+    while tryCount < retryCount:
+        result = get(url)
+        if "status" in result and result["status"] == "finished":
+            logging.info(f"Verified exchange {idString} was filled.")
+            return result
+        elif retryCount-1 > 0:
+            if "status" in result:
+                status = result["status"]
+                if status == "failed" or status == "refunded":
+                    return {"Error": f"Exchange {status}. \n {result}"}
+                time.sleep(waitSeconds)
+                tryCount += 1
+                continue
+        return {"Error": f"Failed to get order {orderId}.\n {result}"}
+
+    return {"Error": f"Failed to verify order after {retryCount} tries.\n{result}"}
 
 def cnStartExchange(apiKey, fromName, toName, address, amount, extraId='', refundAddress='', refundExtraId='', email=''):
     url = api_url + apiKey
