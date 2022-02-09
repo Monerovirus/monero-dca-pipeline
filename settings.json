@@ -1,5 +1,6 @@
 {
-  "crypto_name": "BTC",
+  "transfer_crypto_name": "LTC",
+  "final_crypto_name": "XMR",
   "fiat_name": "USD",
   "topup_threshold": 720,
   "topup_amount": 720,
