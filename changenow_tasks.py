@@ -38,6 +38,8 @@ def cnVerifyExchange(apiKey, idString):
                 status = result["status"]
                 if status == "failed" or status == "refunded":
                     return {"Error": f"Exchange {status}. \n {result}"}
+                elif status == "finished":
+                    return result
                 time.sleep(waitSeconds)
                 tryCount += 1
                 continue
