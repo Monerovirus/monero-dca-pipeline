@@ -26,6 +26,41 @@ def runTasks(amount):
     cb_client = cbpro.AuthenticatedClient(coinbase_auth_info["key"], coinbase_auth_info["secret"], coinbase_auth_info["password"])
     settings = json_io.getJsonFile("settings.json")
 
+    result = cbpPlaceOrder(cb_client, settings["transfer_crypto_name"], settings["fiat_name"], amount)
+    if not succeeded(result):
+        return
+    writeHistory(SCRIPT_PATH + "history.csv", result)
+
+    transferCryptoAmount = result["funds"]
+
+    result = cnStartExchange(changenow_auth_info["key"], settings["transfer_crypto_name"], settings["final_crypto_name"], settings["final_crypto_address"], transferCryptoAmount)
+    if not succeeded(result):
+        return
+
+    cnExchangeId = result["id"]
+    cnPayinAddress = result["payinAddress"]
+    cnPayinMemo = result["payinExtraId"]
+
+    result = cbpTryWithdrawCrypto(cb_client, settings["transfer_crypto_name"], transferCryptoAmount, cnPayinAddress, cnPayinMemo)
+    if not succeeded(result):
+        return
+
+    result = cnVerifyExchange(changenow_auth_info["key"], cnExchangeId)
+    if not succeeded(result):
+        return
+    writeHistory(SCRIPT_PATH + "history.csv", result)
+
+    result = cbpGetFiatBalance(cb_client, settings["fiat_name"])
+    if not succeeded(result):
+        return
+
+    fiatBalance = float(result["balance"])
+
+    if fiatBalance < settings["topup_threshold"]:
+        result = cbpTryDepositFromBank(cb_client, settings["fiat_name"], settings["topup_amount"], settings["bank_identifier"])
+
+    logging.info("Finished tasks successfully.")
+
     return
 
 #start
