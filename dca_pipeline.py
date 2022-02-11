@@ -1,6 +1,8 @@
-import math, os, sys, logging, cbpro, csv
+import math, os, sys, logging, cbpro
 import json_io
 from coinbase_pro_tasks import cbpPlaceOrder, cbpGetFiatBalance, cbpTryDepositFromBank, cbpTryWithdrawCrypto
+from changenow_tasks import cnStartExchange, cnVerifyExchange
+from history_tasks import writeHistory
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
 
@@ -17,20 +19,14 @@ def succeeded(data):
         return False
     return True
 
-def writeToCsv(fileName, data):
-    fullPath = SCRIPT_PATH + fileName
-    isNew = not os.path.exists(fullpath)
-    with open(fullPath, 'a+', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=data.keys())
-        if isNew:
-            writer.writeheader()
-        writer.writerow(data)
-
 def runTasks(amount):
     auth_info = json_io.getJsonFile("auth.json")
     coinbase_auth_info = auth_info["coinbase"]
+    changenow_auth_info = auth_info["changenow"]
     cb_client = cbpro.AuthenticatedClient(coinbase_auth_info["key"], coinbase_auth_info["secret"], coinbase_auth_info["password"])
     settings = json_io.getJsonFile("settings.json")
+
+    return
 
 #start
 if len(sys.argv) != 2:
