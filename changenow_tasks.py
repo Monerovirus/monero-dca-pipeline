@@ -28,6 +28,8 @@ def cnVerifyExchange(apiKey, idString):
     waitSeconds = 120
     result = None
 
+    logging.info(f"Verifying exchange {idString} status...")
+
     while tryCount < retryCount:
         result = get(url)
         if "status" in result and result["status"] == "finished":
