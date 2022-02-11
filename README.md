@@ -1,5 +1,5 @@
 # Monero Dollar-cost Averaging Pipeline
-This repo is a collection of scripts that help with dollar cost averaging (or manually buying) Monero from an exchange that doesn't offer it (Like Coinbase) using fiat currency.
+This repo is a collection of scripts that help with automatically buying Monero from an exchange that doesn't offer it (Like Coinbase) using fiat currency.
 
 I am a resident of a state that has regulations against exchanges that have Monero, so I had to use Coinbase. My method for buying Monero is to buy Stellar Lumens (XLM) on Coinbase Pro, transfer to ChangeNow, and swap there for Monero. The fees are minimal.
 
