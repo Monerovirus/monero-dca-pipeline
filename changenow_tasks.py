@@ -73,5 +73,7 @@ def cnStartExchange(apiKey, fromName, toName, address, amount, extraId='', refun
     recieveAmount = result["amount"]
     resultFrom = result["fromCurrency"]
     resultTo = result["toCurrency"]
+    exchangeId = result["id"]
     logging.info(f"Successfully started exchange from {str(amount)} {resultFrom} to {str(recieveAmount)} {resultTo}.")
+    logging.info(f"ChangeNow id is {exchangeId}.")
     return result
