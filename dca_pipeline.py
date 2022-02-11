@@ -25,13 +25,14 @@ def runTasks(amount):
     changenow_auth_info = auth_info["changenow"]
     cb_client = cbpro.AuthenticatedClient(coinbase_auth_info["key"], coinbase_auth_info["secret"], coinbase_auth_info["password"])
     settings = json_io.getJsonFile("settings.json")
+    return
 
     result = cbpPlaceOrder(cb_client, settings["transfer_crypto_name"], settings["fiat_name"], amount)
     if not succeeded(result):
         return
     writeHistory(SCRIPT_PATH + "history.csv", result)
 
-    transferCryptoAmount = result["funds"]
+    transferCryptoAmount = result["filled_size"]
 
     result = cnStartExchange(changenow_auth_info["key"], settings["transfer_crypto_name"], settings["final_crypto_name"], settings["final_crypto_address"], transferCryptoAmount)
     if not succeeded(result):
