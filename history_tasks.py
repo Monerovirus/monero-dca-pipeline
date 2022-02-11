@@ -40,7 +40,7 @@ def convertData(incoming):
 
 def writeHistory(fullPath, data):
     nData = convertData(data)
-    isNew = not os.path.exists(fullpath)
+    isNew = not os.path.exists(fullPath)
     with open(fullPath, 'a+', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=nData.keys())
         if isNew:
