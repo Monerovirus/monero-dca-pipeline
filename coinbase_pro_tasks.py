@@ -94,9 +94,9 @@ def cbpGetAccountId(client, cryptoName):
     
     return {"Error": f"Unable to get account id for currency {cryptoName}."}
 
-def cbpTryWithdrawCrypto(client, cryptoName, amount, destinationAddress):
+def cbpTryWithdrawCrypto(client, cryptoName, amount, destinationAddress, destinationMemo):
     logging.info(f"Withdrawing {amount} {cryptoName} to address {destinationAddress}.")
-    result = client.crypto_withdraw(amount, cryptoName, destinationAddress)
+    result = client.crypto_withdraw(amount, cryptoName, destinationAddress, destinationMemo)
     if "amount" in result and "id" in result:
         withdrawnAmount = str(result["amount"])
         logging.info(f"Successfully initiated withdrawal for {withdrawnAmount} of {cryptoName} to address {destinationAddress}.")
