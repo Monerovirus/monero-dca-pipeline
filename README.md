@@ -5,7 +5,9 @@ I am a resident of a state that has regulations against exchanges that have Mone
 
 ## Setup
 After cloning the repo, copy 'template auth.json' to a new file named 'auth.json'.
-Enter your API connection details there. Then, also edit the settings.json with the settings you want.
+Enter your API connection details there. Feel free to use the existing ChangeNow api key (I will get a tiny commission, thanks!)
+
+Then, also edit the settings.json with the settings you want.
 - The "transfer crypto" is the one that will be bought on the first exchange (Coinbase Pro in this case) and transferred to ChangeNow. I recommend leaving this as Stellar Lumens (XLM) because the transfer fee is so low, that it doesn't need to be accounted for in the script. Coins with higher transaction fees have not been tested and it will probably cause a failure.
 - The "final crypto" is obviously Monero. But it can be something else if you want. (But why would you? lol).
 - The "final crypto address" is the address that ChangeNow will send your final crypto to after the exchange finishes.
