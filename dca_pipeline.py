@@ -25,7 +25,6 @@ def runTasks(amount):
     changenow_auth_info = auth_info["changenow"]
     cb_client = cbpro.AuthenticatedClient(coinbase_auth_info["key"], coinbase_auth_info["secret"], coinbase_auth_info["password"])
     settings = json_io.getJsonFile("settings.json")
-    return
 
     result = cbpPlaceOrder(cb_client, settings["transfer_crypto_name"], settings["fiat_name"], amount)
     if not succeeded(result):
